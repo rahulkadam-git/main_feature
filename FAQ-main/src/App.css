@@ -1,0 +1,15 @@
+
+.header{
+    width: 100%;
+    height: 15vh;
+    background-color: darkgray;
+    color: lightgray;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@import url(./QnA.css);
+@import url(./complain.css);
+@import url(./dailyReports.css);

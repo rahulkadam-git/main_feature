@@ -1,0 +1,103 @@
+.daily-progress-report {
+  width: 90%;
+  padding: 2rem 1rem;
+}
+.progress-header {
+  width: 10%;
+  background-color: #004481;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  color: white;
+  font-size: 3rem;
+}
+.title {
+  transform: rotate(180deg);
+  text-align: end;
+  padding-bottom: 50px;
+}
+.company-header {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  color: #004481;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-header {
+  font-size: 2rem;
+  font-weight: 900;
+  padding: 10px 0;
+  text-align: center;
+}
+.report-details {
+  display: flex;
+}
+
+.project-details {
+  width: 100%;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+}
+
+.break-line {
+  height: 1px;
+  background-color: black;
+}
+
+.daily-reports {
+  display: flex;
+}
+
+.General-notes,
+.safety-observation,
+.quality-control-obs {
+  padding: 5px 0;
+}
+.box-title {
+  font-weight: 900;
+  padding: 10px;
+}
+.notes {
+  padding: 10px;
+}
+
+.date-time {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.download {
+  text-align: center;
+  margin: 10px;
+}
+
+.download button {
+  background-color: #004481;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+}
+
+.survey-questions {
+  padding-top: 20px;
+}
+
+.images {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.images img {
+  width: 200px;
+  height: 200px;
+}
+.screenshot {
+  padding: 10px;
+}

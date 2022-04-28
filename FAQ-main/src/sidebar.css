@@ -1,0 +1,12 @@
+.sidebar-main{
+    width: 30%;
+    background-color: bisque;
+    height: 100vh;
+   
+}
+
+.sidebar-menu{
+    display: flex;
+    flex-direction: column;
+   
+}
