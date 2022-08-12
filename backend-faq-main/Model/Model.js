@@ -1,16 +1,36 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const queSchema = new mongoose.Schema({
-  type: { isApp: Boolean, isSoftware: Boolean },
+const querySchema = new mongoose.Schema({
+  selectedType: { type: String, require: true },
+  subject: {
+    type: String,
+    require: true,
+  },
   title: {
     type: String,
     require: true,
   },
-  text: {
+  queryText: {
     type: String,
     require: true,
   },
-  imgs: [{ type: String }],
+  queryRegistraionDate: {
+    type: Date,
+    default: new Date(),
+    require: true,
+  },
+  queryScreenshots: [{ type: String }],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comments",
+    },
+  ],
+  queryRegistredBy: {
+    type: Schema.Types.ObjectId,
+    ref: "Users",
+  },
 });
 
-module.exports = mongoose.model("Questions", queSchema);
+module.exports = mongoose.model("Queries", querySchema);

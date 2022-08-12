@@ -1,0 +1,19 @@
+.work-logs-inner{
+    display: flex;
+    justify-content: space-between;
+}
+.dprForm{
+    display: flex;
+    width: 100%;
+    
+}
+.dailyProgressReportForm{
+    
+    width: 90%;
+    padding: 2rem 3rem;
+}
+
+
+.section-title{
+    font-weight: 900;
+}

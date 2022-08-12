@@ -11,4 +11,13 @@
 .qna-section {
   overflow: scroll;
   margin: 20px 0;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar {
+  width: 5px;
 }

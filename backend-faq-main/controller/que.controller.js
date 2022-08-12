@@ -1,76 +1,59 @@
-const Questions = require("../Model/Model");
-const nodemailer = require("nodemailer");
-const hbs = require("nodemailer-express-handlebars");
+const Queries = require("../Model/Model");
+const Comments = require("../Model/comment.model");
+const { queryMail } = require("../helper");
 
-exports.questions = async (req, res) => {
+exports.query = async (req, res) => {
   try {
     if (!req.body) {
       return res.status(200).json("error found");
     }
-    const { type, title, text, imgs, subject } = req.body;
-
-    const Question = new Questions({
-      type,
-      title,
-      text,
-      imgs,
-      subject,
-    });
-
-    const userComplain = await Question.save();
-    const response = "Your complain is registered";
-    console.log(userComplain);
-    if (userComplain) {
-      let images;
-      
-      const imgsLinks = (imgs) => {
-    images = imgs.map((i) => i);
-      };
-
-      imgsLinks(imgs);
-
-      //const mailData = `<div>${images}</div>`;
-      let transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "kadamr607@gmail.com",
-          pass: "jgulhtcftbtqzygx",
-        },
-      });
-      transporter.use(
-        "compile",
-        hbs({
-          viewEngine: "express-handlebars",
-          viewPath: "./views/",
-        })
-      );
-      // send mail with defined transport object
-      let mailOptions = {
-        from: '"New complaint from user"<kadamr607@gmail.com>"',
-        to: "kadamr607@outlook.com",
-        subject: "Complaint from user", // Subject line
-        text: "Hello world?", // plain text body
-        //html: mailData, // html body
-        template: "main",
-        context: {
-          title,
-          subject,
-          text,
-          images
-        },
-      };
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          return console.log(error);
-        }
-
-        console.log("Message sent: %s", info.messageId);
-        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-      });
-      if (response) {
-        return res.status(200).json(response);
-      }
+    const Query = new Queries(req.body);
+    const userQuery = await Query.save();
+    if (userQuery) {
+      let response = queryMail(req.body);
+      return res.status(200).json(response);
+    } else {
+      return res.status(500).json("query could not register");
     }
+  } catch (error) {
+    return res.status(400).json("something went wrong");
+  }
+};
+
+exports.allQuery = async (req, res) => {
+  try {
+    const usersAllQueries = await Queries.find(req.params);
+    return res.status(200).json(usersAllQueries);
+  } catch (error) {
+    return res.status(400).json("something went wrong");
+  }
+};
+
+exports.getQueryFromID = async (req, res) => {
+  try {
+    const requestedQuery = await Queries.findOne(req.params).populate(
+      "comments"
+    );
+    console.log(requestedQuery);
+    return res.status(200).json(requestedQuery);
+  } catch (error) {
+    return res.status(400).json("something went wrong");
+  }
+};
+
+exports.queryComments = async (req, res) => {
+  try {
+    const { queryId } = req.body;
+    const newComments = new Comments(req.body.comment);
+    const AddedComment = await newComments.save();
+    console.log(AddedComment);
+    const queryAdded = await Queries.findByIdAndUpdate(
+      queryId,
+      { $push: { comments: AddedComment._id } },
+      { new: true }
+    );
+
+    return res.status(200).json(queryAdded);
   } catch (error) {
     return res.status(400).json("something went wrong");
   }

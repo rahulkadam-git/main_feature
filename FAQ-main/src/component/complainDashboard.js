@@ -51,12 +51,11 @@ function ComplainDashboard(props) {
       const newComplain = {
         type: { isApp, isSoftware },
         title: selectedSubMenu,
-        text: complainText,
-        imgs: complainScreenshots,
-        subject:subject,
+        queryText: complainText,
+        queryScreenshots: complainScreenshots,
+        subject: subject,
       };
       dispatch(newComplainAction(newComplain));
-     
     }
   };
 
@@ -90,13 +89,12 @@ function ComplainDashboard(props) {
     }
   };
 
-  console.log(picLoading);
   return (
     <div className="complain-form">
       <div className="complain-menu mb-2">
         <form method="post" onSubmit={handleSubmit}>
           <div className="types">
-            <div className="app-complain">              
+            <div className="app-complain">
               <select
                 className="form-select form-select-lg mb-3"
                 aria-label="Default select example"
